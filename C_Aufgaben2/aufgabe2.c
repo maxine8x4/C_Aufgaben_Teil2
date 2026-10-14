@@ -8,5 +8,5 @@ int main () {
         b[i] = a[4 - i];
         printf("%d\n", b[i]);
     }
-
+return 0;
 }
