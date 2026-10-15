@@ -6,7 +6,7 @@ int main () {
     
     int kleinsteZahl = a[0];
     int größteZahl = a[0];
-    float durchschnitt = a[0];
+    float durchschnitt;
     
     for (int i = 0; i < 11; i++) {
         if (a[i] < kleinsteZahl) {
@@ -21,8 +21,12 @@ int main () {
     for (int i = 0; i < 11; i++) {
         summe += a[i];
     }
+
 durchschnitt = (float)summe / 11;
 
+printf("Kleinste Zahl: %d\n", kleinsteZahl);
+printf("Größte Zahl: %d\n", größteZahl);
+printf("Durchschnitt: %.2f\n", durchschnitt);
 
     return 0;
 }
