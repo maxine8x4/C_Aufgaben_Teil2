@@ -46,22 +46,68 @@ int main ()
         //1. grid_cur ausgeben
         for (int y = 0; y < HEIGHT; y++) {
             for (int x = 0; x < WIDTH; x++) {
-                printf("c%", grid_cur[y][x]);
+                printf("%c", grid_cur[y][x]);
+            
+                
             }
             printf("\n");
-        }    
-        //2.Neuen Zustand in grid_next berechnen
+    }    
+
+    //2.Neuen Zustand in grid_next berechnen
+    for (int y = 0; y < HEIGHT; y++) {
+        for (int x = 0; x < WIDTH; x++) {
+            int nachbarn = 0;
+            if (y > 0 && x > 0 && grid_cur[y - 1][x - 1] == living_cell) {
+                nachbarn++;
+            }
+            if (y > 0 && grid_cur[y - 1][x] == living_cell) {
+                nachbarn++;
+            }
+            if (y > 0 && x < WIDTH - 1 && grid_cur[y - 1][x + 1] == living_cell) {
+                nachbarn++;
+            }
+            if (x > 0 && grid_cur[y][x - 1] == living_cell) {
+                nachbarn++;
+            }
+            if (x < WIDTH - 1 && grid_cur[y][x + 1] == living_cell) {
+                nachbarn++;
+            }
+            if (y < HEIGHT - 1 &&  x > 0 && grid_cur[y + 1][x - 1] == living_cell) {
+                nachbarn++;
+            }
+            if (y < HEIGHT - 1 && grid_cur[y + 1][x] == living_cell) {
+                nachbarn++;
+            }
+            if (y < HEIGHT - 1 && x < WIDTH - 1 && grid_cur[y + 1][x + 1] == living_cell) {
+                nachbarn++;
+            }
+
+            
+        if (grid_cur[y][x] == living_cell && nachbarn < 2) {
+                grid_next[y][x] = dead_cell;
+        } else if 
+            (grid_cur[y][x] == living_cell && (nachbarn == 2 || nachbarn == 3)) {
+                grid_next[y][x] = living_cell;
+        } else if 
+            (grid_cur[y][x] == living_cell && nachbarn > 3) {
+                grid_next[y][x] = dead_cell;
+        } else if 
+            (grid_cur[y][x] == dead_cell && nachbarn == 3) {
+                grid_next[y][x] = living_cell;
+            }
+            else {
+                grid_next[y][x] = dead_cell;
+            }
+        }
+        }
+
+        //3.grid_next nach grid_cur kopieren
         for (int y = 0; y < HEIGHT; y++) {
             for (int x = 0; x < WIDTH; x++) {
-            int nachbarn = 0;
-                    if (y > 0 && grid_cur[y - 1][x] == living_cell) {
-                        nachbarn++;
-                    }
-            
-                }
-            
+                grid_cur[y][x] = grid_next[y][x];
+            }
         }
-        //3.grid_next nach grid_cur kopieren
+
     }
     return (0);
 }
